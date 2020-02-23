@@ -2,20 +2,28 @@
 	let searchTerm
 	let jokes = []
 
-	const handleSubmit = async () => {
-		const res = await fetch('/.netlify/functions/node-200')
+	const searchJokes = async () => {
+		const res = await fetch('/.netlify/functions/search-jokes')
 		const resJSON = await res.json()
 		jokes = [...jokes, ...resJSON.data.results]
 		console.log([resJSON.data.results])
+	}
+
+	const randomJoke = async () => {
+		const res = await fetch('./netlify/functions/random-joke')
+		const resJSON = res.json();
+		jokes = [resJSON.data]
+		console.log(resJSON.data)
 	}
 </script>
 
 <main>
 	<h1>Svelte Node App</h1>
-	<form on:submit|preventDefault={handleSubmit(searchTerm)}>
+	<form on:submit|preventDefault={searchJokes(searchTerm)}>
 		<label for="search-term"></label>
 		<input bind:value={searchTerm} type="text" id="search-term">
-		<button>Search</button>
+		<button>Search Jokes</button>
+		<button type="button" on:click|preventDefault={randomJoke}>Random Joke</button>
 	</form>
 
 	{#each jokes as joke}
