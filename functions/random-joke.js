@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-const API_ENDPOINT = 'https://icanhazdadjoke.com/search'
+const API_ENDPOINT = 'https://icanhazdadjoke.com/'
 
 exports.handler = async (event, context) => {
 	let response
@@ -9,7 +9,7 @@ exports.handler = async (event, context) => {
 	}
 
   try {
-		response = await fetch(API_ENDPOINT, {headers: headers})
+		response = await fetch(API_ENDPOINT, {headers})
 			.then(res => res.json())
     // handle response
   } catch (err) {
