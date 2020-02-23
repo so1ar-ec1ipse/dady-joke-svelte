@@ -1,4 +1,4 @@
-exports.handler = (req, res) => {
+module.exports.joke = (req, res) => {
 
 	const https = require('https')
 
@@ -38,4 +38,7 @@ exports.handler = (req, res) => {
 	call.on("error", (err) => {
 		res.end("Error: " + err.message);
 	});
+
+	call.end();
+
 }
