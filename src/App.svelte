@@ -1,10 +1,12 @@
 <script>
-	export let searchTerm;
+	let searchTerm
+	let jokes = []
 
 	const handleSubmit = () => {
 		console.log(`pinging for ${searchTerm}...`)
-		fetch('./netlify/functions/node-200')
-			.then(res => console.log(res))
+		fetch('/.netlify/functions/node-200')
+			.then(res => res.json())
+			.then(res => jokes = res)
 	}
 </script>
 
@@ -15,6 +17,10 @@
 		<input bind:value={searchTerm} type="text" id="search-term">
 		<button>Search</button>
 	</form>
+
+	{#each jokes as joke}
+		<p>{joke}</p>
+	{/each}
 </main>
 
 <style>
