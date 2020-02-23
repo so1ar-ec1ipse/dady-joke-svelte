@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+exports.handler = (req, res) => {
 
 	const https = require('https')
 
