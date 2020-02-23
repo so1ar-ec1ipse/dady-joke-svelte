@@ -2,8 +2,8 @@
 	let searchTerm
 	let jokes = []
 
-	const searchJokes = async () => {
-		const res = await fetch('/.netlify/functions/search-jokes')
+	const searchJokes = async (term) => {
+		const res = await fetch(`/.netlify/functions/search-jokes?term=${term}`)
 		const resJSON = await res.json()
 		jokes = [...jokes, ...resJSON.data.results]
 		console.log([resJSON.data.results])

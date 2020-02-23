@@ -1,8 +1,10 @@
 const fetch = require('node-fetch')
 
-const API_ENDPOINT = 'https://icanhazdadjoke.com/search'
-
 exports.handler = async (event, context) => {
+
+	const term = event.queryStringParameters.term || ''
+	const API_ENDPOINT = `https://icanhazdadjoke.com/search?term=${encodeURIComponent(term)}`
+
 	let response
 	const headers = {
 		"Accept": 'application/json'
@@ -16,7 +18,8 @@ exports.handler = async (event, context) => {
     return {
       statusCode: err.statusCode || 500,
       body: JSON.stringify({
-        error: err.message
+				error: err.message,
+				info: { event, context }
       })
     }
   }
