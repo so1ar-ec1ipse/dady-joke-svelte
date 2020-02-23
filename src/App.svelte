@@ -2,11 +2,11 @@
 	let searchTerm
 	let jokes = []
 
-	const handleSubmit = () => {
-		console.log(`pinging for ${searchTerm}...`)
-		fetch('/.netlify/functions/node-200')
-			.then(res => res.json())
-			.then(res => console.log(res))
+	const handleSubmit = async () => {
+		const res = await fetch('/.netlify/functions/node-200')
+		const resJSON = await res.json()
+		jokes = [...jokes, ...resJSON.data.results]
+		console.log([resJSON.data.results])
 	}
 </script>
 
@@ -19,7 +19,7 @@
 	</form>
 
 	{#each jokes as joke}
-		<p>{joke}</p>
+		<p>{joke.joke}</p>
 	{/each}
 </main>
 
