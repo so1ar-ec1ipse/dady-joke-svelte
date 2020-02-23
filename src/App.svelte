@@ -10,8 +10,10 @@
 	}
 
 	const randomJoke = async () => {
-		const res = await fetch('./netlify/functions/random-joke')
+		const res = await fetch('/.netlify/functions/random-joke')
+		console.log(res)
 		const resJSON = await res.json();
+		console.log(resJSON)
 		jokes = [resJSON.data]
 		console.log(resJSON.data)
 	}
