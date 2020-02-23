@@ -6,7 +6,7 @@
 		console.log(`pinging for ${searchTerm}...`)
 		fetch('/.netlify/functions/node-200')
 			.then(res => res.json())
-			.then(res => jokes = res)
+			.then(res => console.log(res))
 	}
 </script>
 
