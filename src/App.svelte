@@ -5,17 +5,13 @@
 	const searchJokes = async (term) => {
 		const res = await fetch(`/.netlify/functions/search-jokes?term=${term}`)
 		const resJSON = await res.json()
-		jokes = [...jokes, ...resJSON.data.results]
-		console.log([resJSON.data.results])
+		jokes = [...resJSON.data.results]
 	}
 
 	const randomJoke = async () => {
 		const res = await fetch('/.netlify/functions/random-joke')
-		console.log(res)
 		const resJSON = await res.json();
-		console.log(resJSON)
 		jokes = [resJSON.data]
-		console.log(resJSON.data)
 	}
 </script>
 
