@@ -4,7 +4,7 @@
 	const handleSubmit = () => {
 		console.log(`pinging for ${searchTerm}...`)
 		fetch('./netlify/functions/200.js')
-			.then(response => console.log(response))
+			.then(res => console.log(res))
 	}
 </script>
 
