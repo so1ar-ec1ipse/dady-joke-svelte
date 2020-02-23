@@ -3,7 +3,7 @@
 
 	const handleSubmit = () => {
 		console.log(`pinging for ${searchTerm}...`)
-		fetch('/.netlify/functions/200.js')
+		fetch('/.netlify/functions/node-200.js')
 			.then(res => console.log(res))
 	}
 </script>

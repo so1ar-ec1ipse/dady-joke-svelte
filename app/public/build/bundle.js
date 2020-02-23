@@ -342,16 +342,16 @@ var app = (function () {
     			t3 = space();
     			button = element("button");
     			button.textContent = "Search";
-    			add_location(h1, file, 11, 1, 204);
+    			add_location(h1, file, 11, 1, 209);
     			attr_dev(label, "for", "search-term");
-    			add_location(label, file, 13, 2, 291);
+    			add_location(label, file, 13, 2, 296);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "id", "search-term");
-    			add_location(input, file, 14, 2, 327);
-    			add_location(button, file, 15, 2, 390);
-    			add_location(form, file, 12, 1, 230);
+    			add_location(input, file, 14, 2, 332);
+    			add_location(button, file, 15, 2, 395);
+    			add_location(form, file, 12, 1, 235);
     			attr_dev(main, "class", "svelte-1h6otfa");
-    			add_location(main, file, 10, 0, 196);
+    			add_location(main, file, 10, 0, 201);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -413,7 +413,7 @@ var app = (function () {
 
     	const handleSubmit = () => {
     		console.log(`pinging for ${searchTerm}...`);
-    		fetch("/.netlify/functions/200.js").then(res => console.log(res));
+    		fetch("/.netlify/functions/node-200.js").then(res => console.log(res));
     	};
 
     	const writable_props = ["searchTerm"];

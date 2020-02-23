@@ -5,7 +5,7 @@
     "../../App.svelte"
   ],
   "sourcesContent": [
-    "<script>\n\texport let searchTerm;\n\n\tconst handleSubmit = () => {\n\t\tconsole.log(`pinging for ${searchTerm}...`)\n\t\tfetch('/.netlify/functions/200.js')\n\t\t\t.then(res => console.log(res))\n\t}\n</script>\n\n<main>\n\t<h1>Svelte Node App</h1>\n\t<form on:submit|preventDefault={handleSubmit(searchTerm)}>\n\t\t<label for=\"search-term\"></label>\n\t\t<input bind:value={searchTerm} type=\"text\" id=\"search-term\">\n\t\t<button>Search</button>\n\t</form>\n</main>\n\n<style>\n\tmain {\n\t\ttext-align: center;\n\t\tpadding: 1em;\n\t\tmax-width: 240px;\n\t\tmargin: 0 auto;\n\t}\n\n\t@media (min-width: 640px) {\n\t\tmain {\n\t\t\tmax-width: none;\n\t\t}\n\t}\n</style>\n"
+    "<script>\n\texport let searchTerm;\n\n\tconst handleSubmit = () => {\n\t\tconsole.log(`pinging for ${searchTerm}...`)\n\t\tfetch('/.netlify/functions/node-200.js')\n\t\t\t.then(res => console.log(res))\n\t}\n</script>\n\n<main>\n\t<h1>Svelte Node App</h1>\n\t<form on:submit|preventDefault={handleSubmit(searchTerm)}>\n\t\t<label for=\"search-term\"></label>\n\t\t<input bind:value={searchTerm} type=\"text\" id=\"search-term\">\n\t\t<button>Search</button>\n\t</form>\n</main>\n\n<style>\n\tmain {\n\t\ttext-align: center;\n\t\tpadding: 1em;\n\t\tmax-width: 240px;\n\t\tmargin: 0 auto;\n\t}\n\n\t@media (min-width: 640px) {\n\t\tmain {\n\t\t\tmax-width: none;\n\t\t}\n\t}\n</style>\n"
   ],
   "names": [],
   "mappings": "AAoBC,IAAI,eAAC,CAAC,AACL,UAAU,CAAE,MAAM,CAClB,OAAO,CAAE,GAAG,CACZ,SAAS,CAAE,KAAK,CAChB,MAAM,CAAE,CAAC,CAAC,IAAI,AACf,CAAC,AAED,MAAM,AAAC,YAAY,KAAK,CAAC,AAAC,CAAC,AAC1B,IAAI,eAAC,CAAC,AACL,SAAS,CAAE,IAAI,AAChB,CAAC,AACF,CAAC"
