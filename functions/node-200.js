@@ -38,7 +38,4 @@ exports.handler = (req, res) => {
 	call.on("error", (err) => {
 		res.end("Error: " + err.message);
 	});
-
-	call.end();
-
 }
