@@ -34,6 +34,11 @@ a {
 	text-decoration: none;
 }
 
+*:focus, input[type="checkbox"]:focus + label {
+	outline: 2px dashed var(--yellow);
+	outline-offset: 2px;
+}
+
 .container {
 	width: 100%;
 	max-width: 36rem;
