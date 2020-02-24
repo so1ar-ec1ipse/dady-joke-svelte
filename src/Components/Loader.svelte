@@ -18,7 +18,7 @@
 	height: 1em;
 	border-radius: 1em;
 	margin: .1em;
-	background: #69e;
+	background: var(--orange);
 	animation: pulse .9s infinite ease;
 }
 

@@ -1,32 +1,36 @@
 *, *:before, *:after {
-	box-sizing: border-box;
+	box-sizing: inherit;
+	color: inherit;
 }
 
 html {
-	--lightgray: #ccc;
+	--white: #fff;
+	--lightgray: #a7a8aa;
+	--darkergray: #888b8d;
+	--darkestgray: #53565A;
+	--yellow: #FFD100;
+	--orange: #ff6a13;
+	--lightblue: #7BA7BC;
+	--darkblue: #34657F;
 	--border: 2px solid var(--lightgray);
 }
 
 body {
-	color: #333;
+	color: var(--darkestgray);
 	margin: 0;
-	padding: 8px;
 	box-sizing: border-box;
 	font-size: 1.125em;
-	font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+html, body, main {
+	width: 100%;
+	max-width: 100%;
 }
 
 a {
-	color: rgb(0,100,200);
+	color: var(--orange);
 	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-a:visited {
-	color: rgb(0,80,160);
 }
 
 .container {
@@ -35,41 +39,50 @@ a:visited {
 	margin: auto;
 }
 
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
 input, button, select, textarea {
 	font-family: inherit;
 	font-size: inherit;
 	padding: 0.5em 0.8em;
 	margin: 0 0 0.5em 0;
 	box-sizing: border-box;
-	border: 1px solid #ccc;
+	border: 1px solid var(--lightgray);
 	border-radius: .25rem;
 	border: var(--border);
 }
 
 input:disabled {
-	color: #ccc;
+	color: var(--lightgray);
 }
 
 input[type="range"] {
 	height: 0;
 }
 
-button {
-	color: #333;
-	background-color: #f4f4f4;
+button, input[type="submit"] {
+	color: var(--white);
+	background-color: var(--orange);
 	outline: none;
 	font-weight: bold;
 	border: var(--border);
+	border-color: var(--orange);
 }
 
 button:disabled {
-	color: #999;
+	background-color: var(--lightgray);
+	border-color: var(--lightgray);
+	color: var(--darkergray)
 }
 
 button:not(:disabled):active {
-	background-color: #ddd;
+	filter: brightness(0.9);
 }
 
 button:focus {
-	border-color: #666;
+	border-color: var(--darkergray);
 }

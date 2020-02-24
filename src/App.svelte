@@ -48,21 +48,35 @@
 
 <main>
 	<div class="container">
-		<h1>Search Dad Jokes:</h1>
-		<form on:submit|preventDefault={searchJokes(searchTerm)}>
-			<input bind:value={searchTerm} type="text" id="search-term">
-			<button disabled={invalidSearch}>Search Jokes</button>
+		<h1>
+			<img src="svelte-logo-mark.svg" alt="">
+			Dad Joke API
+		</h1>
 
-			<div>
+		<p class="or">Search for jokes</p>
+
+		<form on:submit|preventDefault={searchJokes(searchTerm)}>
+			<div class="flex">
+				<input bind:value={searchTerm} type="text" id="search-term">
+				<button disabled={invalidSearch}>
+					<span aria-hidden="true">🔍</span>
+					Search Jokes
+				</button>
+			</div>
+
+			<div class="flex">
 				<input type="checkbox" id="whole-word" bind:checked={matchWholeWord}>
-				<label for="whole-word">Match whole word</label>
+				<label for="whole-word">Strict search<i>&nbsp;(match whole words and order)</i></label>
 			</div>
 
 		</form>
 
 		<p class="or">or</p>
 
-		<button type="button" on:click|preventDefault={randomJoke}>Get a random joke</button>
+		<button type="button" on:click|preventDefault={randomJoke}>
+			<span aria-hidden="true">❓</span>
+			Get a random joke
+		</button>
 
 		{#if loading}
 			<Loader />
@@ -81,23 +95,73 @@
 <style>
 	main {
 		text-align: center;
-		padding: 1em;
+		padding: 2rem 1rem;
 		margin: 0 auto;
+	}
+
+	.flex input[type="text"] {
+		margin-right: 1rem;
+		flex: 1 1 auto;
+	}
+
+	.flex button, .flex input[type="submit"] {
+		flex: 0 1 auto;
+	}
+
+	.flex input[type="checkbox"] {
+		margin: 0 .5rem 0 0;
+	}
+
+	.error {
+		color: var(--orange);
+		font-weight: bold;
 	}
 
 	.or {
 		font-size: 1.5rem;
 		font-weight: bold;
-	}
-
-	.error {
-		color: red;
-		font-weight: bold;
+		margin-top: 4rem;
 	}
 
 	.or:before, .or:after {
 		content: '—';
 		margin: 0 .25em;
+		color: var(--darkergray);
+	}
+
+	h1 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	h1 img {
+		max-width: 1em;
+		margin-right: .25em;
+	}
+
+	input[type="checkbox"] {
+		position: absolute;
+		left: -100vw;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+	}
+
+	input[type="checkbox"] + label {
+		font-size: .9rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	input[type="checkbox"] + label:before {
+		content: '⬜';
+		font-size: 1.4rem;
+		margin-right: .25rem;
+	}
+
+	input[type="checkbox"]:checked + label:before {
+		content: '✅'
 	}
 
 	ul {
