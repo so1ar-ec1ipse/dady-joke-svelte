@@ -26,6 +26,7 @@ body {
 html, body, main {
 	width: 100%;
 	max-width: 100%;
+	min-height: calc(100vh - 3rem);
 }
 
 a {

@@ -1,25 +1,30 @@
 <script>
 	import Loader from './Components/Loader.svelte'
+	import Footer from './Components/Footer.svelte'
 	import { fly } from 'svelte/transition'
 
 	let searchTerm = ''
-	let jokes = []
+	let wasSearched = false
+	let searchedTerm = ''
+	let strictSearch = false
 	let loading = false
-	let matchWholeWord = false
+	let jokes = []
 	const jokeError = [{joke: "No matching jokes found.", error: true}]
 
 	$: invalidSearch = searchTerm.length < 2
 
 	const searchJokes = (term) => {
 		loading = true
+		wasSearched = true
+		searchedTerm = term
 		jokes = []
 		fetch(`/.netlify/functions/search-jokes?term=${term}`)
 			.then(res => res.json())
 			.then(json => {
 				if (json.data.results.length) {
 					jokes = [...json.data.results]
-					if (matchWholeWord) {
-						const matchesWholeWord = new RegExp(` ${term} `)
+					if (strictSearch) {
+						const matchesWholeWord = new RegExp(` ${term} `, "i")
 						jokes = [...jokes.filter(joke => matchesWholeWord.test(joke.joke))]
 						if (!jokes.length) jokes = jokeError
 					}
@@ -31,6 +36,7 @@
 	}
 
 	const randomJoke = () => {
+		wasSearched = false
 		loading = true
 		jokes = []
 		const res = fetch('/.netlify/functions/random-joke')
@@ -43,6 +49,14 @@
 				}
 				loading = false
 			})
+		}
+
+		const highlight = (joke, searchTerm) => {
+			const terms = [...searchTerm.trim().split(/\s/)]
+			terms.forEach(term => {
+				joke = joke.split(term).join(`<b>${term}</b>`)
+			})
+			return joke
 		}
 </script>
 
@@ -65,7 +79,7 @@
 			</div>
 
 			<div class="flex">
-				<input type="checkbox" id="whole-word" bind:checked={matchWholeWord}>
+				<input type="checkbox" id="whole-word" bind:checked={strictSearch}>
 				<label for="whole-word">Strict search<i>&nbsp;(match whole words and order)</i></label>
 			</div>
 
@@ -85,12 +99,20 @@
 		<ul>
 			{#each jokes as joke, index}
 				<li in:fly="{{ y: 20, duration: 400, delay: index * 120}}" class:error={joke.error}>
-					{joke.joke}
+					{#if wasSearched}
+						{@html highlight(joke.joke, searchedTerm)}
+					{:else}
+						{joke.joke}
+					{/if}
 				</li>
 			{/each}
 		</ul>
 	</div>
 </main>
+
+<Footer />
+
+
 
 <style>
 	main {
