@@ -54,7 +54,8 @@
 		const highlight = (joke, searchTerm) => {
 			const terms = [...searchTerm.trim().split(/\s/)]
 			terms.forEach(term => {
-				joke = joke.split(term).join(`<b>${term}</b>`)
+				const matches = new RegExp(term, 'i')
+				joke = joke.split(matches).join(`<b class="highlight">${term}</b>`)
 			})
 			return joke
 		}
@@ -67,7 +68,14 @@
 			Dad Joke API
 		</h1>
 
-		<p class="or">Search for jokes</p>
+
+		<button type="button" on:click|preventDefault={randomJoke}>
+			<span aria-hidden="true">❓</span>
+			Get a random joke
+		</button>
+
+		<!-- <p class="or">Search for jokes</p> -->
+		<p class="or">or</p>
 
 		<form on:submit|preventDefault={searchJokes(searchTerm)}>
 			<div class="flex">
@@ -85,12 +93,7 @@
 
 		</form>
 
-		<p class="or">or</p>
 
-		<button type="button" on:click|preventDefault={randomJoke}>
-			<span aria-hidden="true">❓</span>
-			Get a random joke
-		</button>
 
 		{#if loading}
 			<Loader />
@@ -122,7 +125,7 @@
 	}
 
 	.flex input[type="text"] {
-		margin-right: 1rem;
+		margin: 0 .5em 0 0;
 		flex: 1 1 auto;
 	}
 
@@ -142,7 +145,7 @@
 	.or {
 		font-size: 1.5rem;
 		font-weight: bold;
-		margin-top: 4rem;
+		margin: 2rem auto;
 	}
 
 	.or:before, .or:after {
@@ -155,7 +158,9 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-bottom: 4rem;
 	}
+
 	h1 img {
 		max-width: 1em;
 		margin-right: .25em;
@@ -174,6 +179,11 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		color: var(--lightgray);
+	}
+
+	input[type="checkbox"]:checked + label {
+		color: var(--darkestgray);
 	}
 
 	input[type="checkbox"] + label:before {
@@ -186,10 +196,15 @@
 		content: '✅'
 	}
 
+	button {
+		margin: 0;
+	}
+
 	ul {
 		text-align: left;
 		list-style-type: none;
 		margin: 3rem auto;
+		padding: 0;
 	}
 
 	li {

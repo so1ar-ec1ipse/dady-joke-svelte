@@ -48,7 +48,15 @@ a {
 .flex {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
+	align-items: stretch;
+}
+
+.flex + .flex {
+	margin-top: .5rem;
+}
+
+.highlight {
+	color: var(--orange);
 }
 
 input, button, select, textarea {
