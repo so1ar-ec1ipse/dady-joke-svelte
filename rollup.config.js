@@ -1,15 +1,4 @@
 import svelte from 'rollup-plugin-svelte';
-<<<<<<< HEAD
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
-
-const production = !process.env.ROLLUP_WATCH;
-
-export default {
-	input: 'src/main.js',
-=======
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
@@ -43,7 +32,6 @@ function serve() {
 
 export default {
 	input: 'src/main.ts',
->>>>>>> Added TypeScript and componentized
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -52,16 +40,6 @@ export default {
 	},
 	plugins: [
 		svelte({
-<<<<<<< HEAD
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('public/build/bundle.css');
-			}
-		}),
-=======
 			preprocess: sveltePreprocess(),
 			compilerOptions: {
 				// enable run-time checks when not in production
@@ -71,7 +49,6 @@ export default {
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: 'bundle.css' }),
->>>>>>> Added TypeScript and componentized
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
@@ -83,13 +60,10 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-<<<<<<< HEAD
-=======
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production
 		}),
->>>>>>> Added TypeScript and componentized
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
@@ -107,23 +81,3 @@ export default {
 		clearScreen: false
 	}
 };
-<<<<<<< HEAD
-
-function serve() {
-	let started = false;
-
-	return {
-		writeBundle() {
-			if (!started) {
-				started = true;
-
-				require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
-					stdio: ['ignore', 'inherit', 'inherit'],
-					shell: true
-				});
-			}
-		}
-	};
-}
-=======
->>>>>>> Added TypeScript and componentized
