@@ -1,5 +1,5 @@
 <h1>
-  <img src="./svelte-logo-mark.svg" alt="">
+  <img src="./svelte-logo-mark.svg" alt="Svelte">
   Dad Joke API
 </h1>
 
