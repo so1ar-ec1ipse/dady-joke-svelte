@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script>
 	import Loader from './Components/Loader.svelte'
 	import Footer from './Components/Footer.svelte'
@@ -14,6 +15,27 @@
 	$: invalidSearch = searchTerm.length < 2
 
 	const searchJokes = (term) => {
+=======
+<script lang="ts">
+	import Loader from './Components/Loader.svelte'
+	import Footer from './Components/Footer.svelte'
+	import Heading from './Components/Heading.svelte'
+	import RandomJokeButton from './Components/RandomJokeButton.svelte'
+	import Joke from './Components/Joke.svelte'
+	import type { JokeType } from './Interfaces/Joke'
+	
+	let searchTerm: string = ''
+	let wasSearched: boolean  = false
+	let searchedTerm: string = ''
+	let strictSearch: boolean = false
+	let loading: boolean = false
+	let jokes: JokeType[] = []
+	const jokeError: JokeType[] = [{ joke: "No matching jokes found.", error: true }]
+	
+	$: invalidSearch = searchTerm.length < 2
+	
+	const searchJokes = (term: string): void => {
+>>>>>>> Added TypeScript and componentized
 		loading = true
 		wasSearched = true
 		searchedTerm = term
@@ -32,6 +54,7 @@
 					jokes = jokeError
 				}
 				loading = false
+<<<<<<< HEAD
 		})
 	}
 
@@ -40,6 +63,16 @@
 		loading = true
 		jokes = []
 		const res = fetch('/.netlify/functions/random-joke')
+=======
+			})
+	}
+	
+	const getRandomJoke = (): void => {
+		wasSearched = false
+		loading = true
+		jokes = []
+		fetch('/.netlify/functions/random-joke')
+>>>>>>> Added TypeScript and componentized
 			.then(res => res.json())
 			.then(json => {
 				if(json.data) {
@@ -49,6 +82,7 @@
 				}
 				loading = false
 			})
+<<<<<<< HEAD
 		}
 
 		const highlight = (joke, searchTerm) => {
@@ -59,10 +93,25 @@
 			})
 			return joke
 		}
+=======
+	}
+	
+	const highlight = (joke: string, searchTerm: string): string => {
+		const terms = [...searchTerm.trim().split(/\s/)]
+
+		terms.forEach(term => {
+			const matches = new RegExp(term, 'i')
+			//TODO: this can sometimes cause unexpected HTML
+			joke = joke.split(matches).join(`<b class="highlight">${term}</b>`)
+		})
+		return joke
+	}
+>>>>>>> Added TypeScript and componentized
 </script>
 
 <main>
 	<div class="container">
+<<<<<<< HEAD
 		<h1>
 			<img src="svelte-logo-mark.svg" alt="">
 			Dad Joke API
@@ -78,6 +127,15 @@
 		<p class="or">or</p>
 
 		<form on:submit|preventDefault={searchJokes(searchTerm)}>
+=======
+		<Heading />
+		
+		<RandomJokeButton {getRandomJoke}/>
+		
+		<p class="or">or</p>
+		
+		<form on:submit|preventDefault={() => searchJokes(searchTerm)}>
+>>>>>>> Added TypeScript and componentized
 			<div class="flex">
 				<input bind:value={searchTerm} type="text" id="search-term">
 				<button disabled={invalidSearch}>
@@ -85,11 +143,16 @@
 					Search Jokes
 				</button>
 			</div>
+<<<<<<< HEAD
 
+=======
+			
+>>>>>>> Added TypeScript and componentized
 			<div class="flex">
 				<input type="checkbox" id="whole-word" bind:checked={strictSearch}>
 				<label for="whole-word">Strict search<i>&nbsp;(match whole words and order)</i></label>
 			</div>
+<<<<<<< HEAD
 
 		</form>
 
@@ -108,6 +171,17 @@
 						{joke.joke}
 					{/if}
 				</li>
+=======
+		</form>
+		
+		{#if loading}
+			<Loader />
+		{/if}
+		
+		<ul>
+			{#each jokes as joke, index}
+				<Joke {joke} {index} {searchedTerm} {wasSearched} {highlight}/>
+>>>>>>> Added TypeScript and componentized
 			{/each}
 		</ul>
 	</div>
@@ -123,11 +197,16 @@
 		padding: 2rem 1rem;
 		margin: 0 auto;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> Added TypeScript and componentized
 	.flex input[type="text"] {
 		margin: 0 .5em 0 0;
 		flex: 1 1 auto;
 	}
+<<<<<<< HEAD
 
 	.flex button, .flex input[type="submit"] {
 		flex: 0 1 auto;
@@ -142,17 +221,33 @@
 		font-weight: bold;
 	}
 
+=======
+	
+	.flex button {
+		flex: 0 1 auto;
+	}
+	
+	.flex input[type="checkbox"] {
+		margin: 0 .5rem 0 0;
+	}
+	
+>>>>>>> Added TypeScript and componentized
 	.or {
 		font-size: 1.5rem;
 		font-weight: bold;
 		margin: 2rem auto;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> Added TypeScript and componentized
 	.or:before, .or:after {
 		content: '—';
 		margin: 0 .25em;
 		color: var(--darkergray);
 	}
+<<<<<<< HEAD
 
 	h1 {
 		display: flex;
@@ -166,6 +261,9 @@
 		margin-right: .25em;
 	}
 
+=======
+	
+>>>>>>> Added TypeScript and componentized
 	input[type="checkbox"] {
 		position: absolute;
 		left: -100vw;
@@ -173,7 +271,11 @@
 		height: 1px;
 		opacity: 0;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> Added TypeScript and componentized
 	input[type="checkbox"] + label {
 		font-size: .9rem;
 		display: flex;
@@ -181,16 +283,25 @@
 		align-items: center;
 		color: var(--lightgray);
 	}
+<<<<<<< HEAD
 
 	input[type="checkbox"]:checked + label {
 		color: var(--darkestgray);
 	}
 
+=======
+	
+	input[type="checkbox"]:checked + label {
+		color: var(--darkestgray);
+	}
+	
+>>>>>>> Added TypeScript and componentized
 	input[type="checkbox"] + label:before {
 		content: '⬜';
 		font-size: 1.4rem;
 		margin-right: .25rem;
 	}
+<<<<<<< HEAD
 
 	input[type="checkbox"]:checked + label:before {
 		content: '✅'
@@ -200,16 +311,30 @@
 		margin: 0;
 	}
 
+=======
+	
+	input[type="checkbox"]:checked + label:before {
+		content: '✅'
+	}
+	
+	button {
+		margin: 0;
+	}
+	
+>>>>>>> Added TypeScript and componentized
 	ul {
 		text-align: left;
 		list-style-type: none;
 		margin: 3rem auto;
 		padding: 0;
 	}
+<<<<<<< HEAD
 
 	li {
 		margin-bottom: 1em;
 		padding-bottom: 1em;
 		border-bottom: 1px solid #ccc;
 	}
+=======
+>>>>>>> Added TypeScript and componentized
 </style>
